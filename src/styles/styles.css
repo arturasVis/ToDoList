@@ -1,0 +1,35 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+#main_container{
+    display: grid;
+    grid-template-rows: 1.5fr 12fr 1fr;
+    height: 100vh;
+}
+
+.top{
+    background-color: aquamarine;
+}
+.content{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,20vw);
+    background-color: antiquewhite;
+    padding: 3rem 0;
+    grid-gap: 2rem;
+}
+.footer{
+    background-color: blue;
+}
+.card{
+    width: 15rem;
+    height: 20rem;
+    background-color: pink;
+    justify-self: center;
+    border-radius: 5%;
+    box-shadow: 10px 5px 5px palevioletred;
+}
+.card:hover{
+    background-color: blueviolet;
+}
