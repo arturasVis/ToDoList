@@ -5,7 +5,7 @@
 
 #main_container{
     display: grid;
-    grid-template-rows: 1.5fr 12fr 1fr;
+    grid-template-rows: 6rem 12fr 4rem;
     height: 100vh;
 }
 
@@ -16,8 +16,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fit,20vw);
     background-color: antiquewhite;
-    padding: 3rem 0;
-    grid-gap: 2rem;
+    padding: 3rem 0 3rem 3rem;
+    grid-gap: 3rem;
 }
 .footer{
     background-color: blue;
@@ -32,4 +32,24 @@
 }
 .card:hover{
     background-color: blueviolet;
+}
+
+#button{
+    display: grid;
+    
+}
+
+#button > img{
+    width: 70%;
+    align-self: center;
+    justify-self: center;
+}
+.top{
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.footer{
+    min-height: 2rem;
 }
