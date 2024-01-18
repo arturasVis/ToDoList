@@ -1,0 +1,11 @@
+What I need?
+
+Object for project
+
+project{
+    Name;
+    Array[] Tasks;
+
+}
+
+Projects class?

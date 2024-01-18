@@ -1,4 +1,5 @@
 import Plus from '../assets/plus.png'
+import { loadForm } from './FormLoader';
 
 const content=document.querySelector('.content');
 
@@ -21,6 +22,7 @@ export function CreateProjectButton(){
     button.appendChild(img);
     content.appendChild(button);
     button.addEventListener("click",(e)=>{
-        CreateProjectCard()
+        //CreateProjectCard()
+        loadForm();
     })
 }

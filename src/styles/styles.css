@@ -53,3 +53,12 @@
 .footer{
     min-height: 2rem;
 }
+.popup{
+    display: block;
+    position: fixed;
+    left:45%;
+    top: 25%;
+    border: 3px solid var(--jet);
+    z-index: 9;
+}
+
