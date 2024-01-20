@@ -1,3 +1,6 @@
+import { createProject } from "./Project";
+import { CreateProjectCard } from "./ProjectCardLoader";
+
 const content=document.querySelector('.content');
 
 export function loadForm(){
@@ -7,6 +10,7 @@ export function loadForm(){
     popup.classList.add('popup');
 
     const form = document.createElement('form');
+    form.classList.add("popup_form")
 
     const label=document.createElement('label');
     label.textContent='Project Title:';
@@ -22,13 +26,20 @@ export function loadForm(){
     submitButton.textContent = "Add";
 
     submitButton.addEventListener("click",(e)=>{
-        alert("You pressed me")
+        if(inputField.value!=""){
+            CreateProjectCard(inputField.value);
+            close();
+        }
     })
 
     // Create a cancel button
     const cancelButton = document.createElement("button");
     cancelButton.type = "button";
     cancelButton.textContent = "Cancel";
+
+    cancelButton.addEventListener("click",(e)=>{
+        close()
+    })
 
     form.appendChild(label);
     form.appendChild(inputField);
@@ -39,4 +50,14 @@ export function loadForm(){
 
     content.appendChild(popup);
 
+}
+
+function close(){
+    try {
+        const container=document.querySelector(".popup");
+        container.remove();
+    } catch (error) {
+        console.log("No div found")
+    }
+    
 }

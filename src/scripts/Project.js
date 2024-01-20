@@ -10,14 +10,14 @@ export function createProject(title,tasks=[]){
             console.log(this.tasks)
         },
         save(){
-            sessionStorage.setItem(this.title,JSON.stringify(this))
+            localStorage.setItem(this.title,JSON.stringify(this))
         }
     }
     
-    sessionStorage.setItem(title,JSON.stringify(project));
+    localStorage.setItem(title,JSON.stringify(project));
     return project;
 }
-
+//might not need
 export function loadSaved(localProject){
     const project=createProject(localProject.title,localProject.tasks);
 

@@ -56,9 +56,25 @@
 .popup{
     display: block;
     position: fixed;
+    background-color: aliceblue;
+    height: auto;
+    width: 200px;
     left:45%;
     top: 25%;
-    border: 3px solid var(--jet);
+    border: 3px solid black;
     z-index: 9;
+}
+.popup_form{
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    text-align: center;
+    padding: 5px;
+}
+.popup_form>button{
+    margin: 15px 25px;
+}
+.popup_form> input{
+    margin: 15px 25px;
 }
 

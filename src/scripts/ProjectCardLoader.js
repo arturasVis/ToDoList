@@ -1,20 +1,28 @@
 import Plus from '../assets/plus.png'
 import { loadForm } from './FormLoader';
+import { createProject } from './Project';
+import { loadSaved } from './Project';
 
 const content=document.querySelector('.content');
 
-export function CreateProjectCard(){
-    
-
+export function CreateProjectCard(projectName){
     const projectCard=document.createElement('div');
 
+    const newProject=createProject(projectName);
     projectCard.classList.add('card');
-    projectCard.id='project';
+    projectCard.id='projectName';
+
+    const projectTitle=document.createElement("h1")
+
+    projectTitle.innerHTML=projectName
+
+    projectCard.appendChild(projectTitle)
     content.appendChild(projectCard)
 }
 export function CreateProjectButton(){
     const button=document.createElement('div');
     const img= document.createElement('img')
+
     button.classList.add('card');
     button.id='button';
     img.src=Plus
@@ -22,7 +30,22 @@ export function CreateProjectButton(){
     button.appendChild(img);
     content.appendChild(button);
     button.addEventListener("click",(e)=>{
-        //CreateProjectCard()
         loadForm();
     })
+}
+
+export function reloadProjects(){
+    for(let i=0;i < localStorage.length;i++)
+    {
+        try {
+            const localProject=JSON.parse(localStorage.getItem(localStorage.key(i)));
+            const saved=loadSaved(localProject)
+            if(saved.title!=undefined)
+                CreateProjectCard(saved.title)
+        } catch (error) {
+            console.log("Not JSON"+error)
+        }
+        
+        
+    }
 }
