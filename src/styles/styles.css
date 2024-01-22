@@ -14,10 +14,22 @@
 }
 .content{
     display: grid;
-    grid-template-columns: repeat(auto-fit,20vw);
     background-color: antiquewhite;
+
+}
+.main-menu{
+    grid-template-columns: repeat(auto-fit,20vw);
     padding: 3rem 0 3rem 3rem;
     grid-gap: 3rem;
+}
+.project-menu{
+    grid-template-columns: 1fr 4fr;
+
+}
+.mainScreen{
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    background-color: bisque;
 }
 .footer{
     background-color: blue;

@@ -4,6 +4,11 @@ import { CreateProjectButton } from './scripts/ProjectCardLoader';
 import { reloadProjects } from './scripts/ProjectCardLoader';
 
 
-const button=document.querySelector('#button');
 CreateProjectButton();
 reloadProjects();
+
+
+export function ClearContent(){
+    const div=document.querySelector(".content");
+    div.innerHTML=""
+}

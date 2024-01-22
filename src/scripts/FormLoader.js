@@ -1,4 +1,3 @@
-import { createProject } from "./Project";
 import { CreateProjectCard } from "./ProjectCardLoader";
 
 const content=document.querySelector('.content');
@@ -24,11 +23,18 @@ export function loadForm(){
     const submitButton = document.createElement("button");
     submitButton.type="button"
     submitButton.textContent = "Add";
-
-    submitButton.addEventListener("click",(e)=>{
+    function createProcess(){
         if(inputField.value!=""){
             CreateProjectCard(inputField.value);
             close();
+        }
+    }
+    submitButton.addEventListener("click",(e)=>{
+        createProcess();
+    })
+    form.addEventListener("keydown",(e)=>{
+        if(e.key==="Enter"){
+            createProcess();
         }
     })
 

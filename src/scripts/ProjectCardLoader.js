@@ -2,6 +2,8 @@ import Plus from '../assets/plus.png'
 import { loadForm } from './FormLoader';
 import { createProject } from './Project';
 import { loadSaved } from './Project';
+import { ClearContent } from '..';
+import { LoadProjectView } from './ProjectPageLoader';
 
 const content=document.querySelector('.content');
 
@@ -10,10 +12,16 @@ export function CreateProjectCard(projectName){
 
     const newProject=createProject(projectName);
     projectCard.classList.add('card');
-    projectCard.id='projectName';
+    projectCard.id=projectName;
 
     const projectTitle=document.createElement("h1")
-
+    projectCard.addEventListener("click",(e) =>{
+        ClearContent();
+        const project=loadSaved(JSON.parse(localStorage.getItem(e.target.id)))
+        console.log(project)
+        
+        LoadProjectView(project)
+    })
     projectTitle.innerHTML=projectName
 
     projectCard.appendChild(projectTitle)
@@ -35,6 +43,8 @@ export function CreateProjectButton(){
 }
 
 export function reloadProjects(){
+    content.classList.remove("project-menu");
+    content.classList.add("main-menu");
     for(let i=0;i < localStorage.length;i++)
     {
         try {
