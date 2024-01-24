@@ -1,9 +1,11 @@
+import { createTask } from "./task";
 export function createProject(title,tasks=[]){
     const project={
         title,
         tasks,
         addTask(task){
-            this.tasks.push(task);
+            const taskObj=createTask(task)
+            this.tasks.push(taskObj);
             this.save()
         },
         listTasks(){
@@ -18,7 +20,8 @@ export function createProject(title,tasks=[]){
     return project;
 }
 //might not need
-export function loadSaved(localProject){
+export function loadSaved(storage){
+    const localProject=JSON.parse(storage);
     const project=createProject(localProject.title,localProject.tasks);
 
     return project;

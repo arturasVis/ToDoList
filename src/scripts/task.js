@@ -1,15 +1,16 @@
-export function creatTask(title,checked,notes){
+export function createTask(title,checked=false,notes=""){
     const task={
         title,
         checked,
         notes,
-        save(){
-            localStorage.setItem(this.title,JSON.stringify(this))
-        }
     }
-    localStorage.setItem(title,JSON.stringify(task))
 
     return task
+}
+
+export function loadSavedTask(storage){
+    const task=JSON.parse(storage);
+    return createTask(task.title,task.checked,task.notes)
 }
 
 /*

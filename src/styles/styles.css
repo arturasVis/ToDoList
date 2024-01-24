@@ -31,6 +31,15 @@
     grid-template-rows: 1fr 5fr;
     background-color: bisque;
 }
+.main_top{
+    text-align: center;
+    font-size: 50px;
+    padding: 3px;
+    background-color: beige;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .footer{
     background-color: blue;
 }
@@ -89,4 +98,11 @@
 .popup_form> input{
     margin: 15px 25px;
 }
-
+.item-container{
+    display: flex;
+    gap: 30px;
+    margin: 5px;
+}
+.item-container > h1{
+    font-size: 25px;
+}

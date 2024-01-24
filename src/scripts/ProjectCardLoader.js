@@ -7,22 +7,21 @@ import { LoadProjectView } from './ProjectPageLoader';
 
 const content=document.querySelector('.content');
 
-export function CreateProjectCard(projectName){
+export function CreateProjectCard(project){
     const projectCard=document.createElement('div');
 
-    const newProject=createProject(projectName);
+
     projectCard.classList.add('card');
-    projectCard.id=projectName;
+    projectCard.id=project.title;
 
     const projectTitle=document.createElement("h1")
     projectCard.addEventListener("click",(e) =>{
         ClearContent();
-        const project=loadSaved(JSON.parse(localStorage.getItem(e.target.id)))
-        console.log(project)
+        const project=loadSaved(localStorage.getItem(e.target.id))
         
         LoadProjectView(project)
     })
-    projectTitle.innerHTML=projectName
+    projectTitle.innerHTML=project.title
 
     projectCard.appendChild(projectTitle)
     content.appendChild(projectCard)
@@ -47,11 +46,12 @@ export function reloadProjects(){
     content.classList.add("main-menu");
     for(let i=0;i < localStorage.length;i++)
     {
+
         try {
-            const localProject=JSON.parse(localStorage.getItem(localStorage.key(i)));
-            const saved=loadSaved(localProject)
+            
+            const saved=loadSaved(localStorage.getItem(localStorage.key(i)))
             if(saved.title!=undefined)
-                CreateProjectCard(saved.title)
+                CreateProjectCard(saved)
         } catch (error) {
             console.log("Not JSON"+error)
         }
