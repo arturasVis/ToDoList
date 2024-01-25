@@ -1,9 +1,12 @@
 import Back from '../assets/back_button.png'
+import Edit_button from '../assets/edit-text.png'
+import dropDownImg from '../assets/arrow-down.png'
 import { CreateProjectButton } from './ProjectCardLoader';
 import { reloadProjects } from './ProjectCardLoader';
 import { ClearContent } from '..';
 import { loadSaved } from './Project';
 import { createTask } from './task';
+
 
 const content = document.querySelector('.content');
 
@@ -48,20 +51,38 @@ export function LoadProjectView(project){
 }
 
 function createTaskItem(task){
-    const itemContainer=document.createElement('div')
-    const main_bottom=document.querySelector('.main_bottom')
-    const item_title=document.createElement('h1');
+    const taskContainer=document.createElement('div');
+    const labelContainer=document.createElement('div');
+    const bottomContainer=document.createElement('div');
+    const itemContainer=document.createElement('label');
+    const main_bottom=document.querySelector('.main_bottom');
     const checkBox=document.createElement('input');
+    const checkMark=document.createElement('span');
+    const editButton=document.createElement('img');
+    const dropDown=document.createElement('img');
+    const editDivCont=document.createElement('div');
 
-    itemContainer.classList.add("item-container")
-
-    checkBox.type='checkbox'
-
-    item_title.innerHTML=task.title;
-
-    itemContainer.appendChild(item_title);
+    dropDown.src=dropDownImg;
+    editButton.src=Edit_button;
+    editButton.classList.add('edit-button');
+    itemContainer.classList.add("container");
+    checkMark.classList.add('checkmark');
+    checkBox.type='checkbox';
+    dropDown.classList.add('drop-down')
+    itemContainer.innerHTML=task.title;
+    bottomContainer.classList.add('bottom-container')
+    editDivCont.addEventListener("click",(e)=>{
+        itemContainer.contentEditable=true;
+    })
+    bottomContainer.appendChild(dropDown);
+    editDivCont.appendChild(editButton);
     itemContainer.appendChild(checkBox);
-    main_bottom.appendChild(itemContainer);
+    itemContainer.appendChild(checkMark);
+    itemContainer.appendChild(editDivCont);
+    labelContainer.appendChild(itemContainer);
+    taskContainer.appendChild(labelContainer);
+    taskContainer.appendChild(bottomContainer)
+    main_bottom.appendChild(taskContainer)
 }
 function loadTasks(){
     content.classList.remove("main-menu");
