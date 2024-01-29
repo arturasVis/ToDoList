@@ -1,6 +1,5 @@
 import Plus from '../assets/plus.png'
 import { loadForm } from './FormLoader';
-import { createProject } from './Project';
 import { loadSaved } from './Project';
 import { ClearContent } from '..';
 import { LoadProjectView } from './ProjectPageLoader';
@@ -9,7 +8,7 @@ const content=document.querySelector('.content');
 
 export function CreateProjectCard(project){
     const projectCard=document.createElement('div');
-
+    
 
     projectCard.classList.add('card');
     projectCard.id=project.title;
@@ -48,7 +47,6 @@ export function reloadProjects(){
     {
 
         try {
-            
             const saved=loadSaved(localStorage.getItem(localStorage.key(i)))
             if(saved.title!=undefined)
                 CreateProjectCard(saved)

@@ -13,6 +13,10 @@ export function createProject(title,tasks=[]){
         },
         save(){
             localStorage.setItem(this.title,JSON.stringify(this))
+        },
+        updateTask(newTask,index){
+            this.tasks[index].title=newTask
+            this.save();
         }
     }
     

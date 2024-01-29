@@ -1,4 +1,5 @@
 import { CreateProjectCard } from "./ProjectCardLoader";
+import { createProject } from './Project';
 
 const content=document.querySelector('.content');
 
@@ -25,7 +26,8 @@ export function loadForm(){
     submitButton.textContent = "Add";
     function createProcess(){
         if(inputField.value!=""){
-            CreateProjectCard(inputField.value);
+            const project=createProject(inputField.value)
+            CreateProjectCard(project);
             close();
         }
     }
