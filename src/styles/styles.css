@@ -200,3 +200,11 @@
     width: 30px;
     height: 30px;
   }
+  .buttonsCont{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+  .buttonsCont >div:first-child{
+    padding-top: 4px;
+  }

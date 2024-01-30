@@ -2,6 +2,7 @@ import Back from '../assets/back_button.png'
 import Edit_button from '../assets/edit-text.png'
 import dropDownImg from '../assets/arrow-down.png'
 import plusIcon from '../assets/plus-sign.png'
+import deltetImg from '../assets/delete.png'
 import { CreateProjectButton } from './ProjectCardLoader';
 import { reloadProjects } from './ProjectCardLoader';
 import { ClearContent } from '..';
@@ -20,8 +21,8 @@ export function LoadProjectView(project){
     const title=document.createElement('h1');
     const back_button=document.createElement('div');
     const img=document.createElement('img');
-    const plusImg=document.createElement('img');
-    const plusDiv=document.createElement('div')
+
+   
 
     
     back_button.addEventListener("click",(e)=>{
@@ -29,17 +30,14 @@ export function LoadProjectView(project){
         CreateProjectButton();
         reloadProjects();
     })
-    img.src=Back
-    plusImg.src=plusIcon;
+    
+    img.src=Back;
     back_button.appendChild(img);
-    plusDiv.appendChild(plusImg)
-    plusDiv.classList.add('plus-img');
+    
     content.classList.remove("main-menu")
     content.classList.add("project-menu")
     content.id=project.title
-    plusDiv.addEventListener("click",(e)=>{
-        alert("Gay")
-    })
+
     title.innerHTML=project.title;
 
     mainScreen.classList.add('mainScreen');
@@ -60,9 +58,7 @@ export function LoadProjectView(project){
     content.appendChild(mainScreen);
     loadTasks()
     addEventsToCheckmarks();
-    main_bottom.appendChild(plusDiv);
-    mainScreen.appendChild(main_bottom);
-    content.appendChild(mainScreen)
+    addAddButton();
 }
 
 function createTaskItem(task,i){
@@ -77,15 +73,21 @@ function createTaskItem(task,i){
     const editButton=document.createElement('img');
     const dropDown=document.createElement('img');
     const editDivCont=document.createElement('div');
+    const deleteButtonImg=document.createElement('img');
+    const deleteButton=document.createElement('div');
+    const buttonsCont=document.createElement('div');
 
     dropDown.src=dropDownImg;
     editButton.src=Edit_button;
+    deleteButtonImg.src=deltetImg;
 
     editButton.classList.add('edit-button');
+    deleteButtonImg.classList.add('edit-button');
     labelContainer.classList.add("container");
     itemContainer.classList.add("item-container");
     taskContainer.classList.add("task-container");
     checkMark.classList.add('checkmark');
+    buttonsCont.classList.add('buttonsCont');
     checkBox.id="Task"+i;
     taskLabel.htmlFor=checkBox.id;
     checkBox.type='checkbox';
@@ -93,6 +95,7 @@ function createTaskItem(task,i){
     taskLabel.innerHTML=task.title;
     taskContainer.id=i;
     bottomContainer.classList.add('bottom-container')
+
     
     editDivCont.addEventListener("click",(e)=>{
         taskLabel.contentEditable=true;
@@ -106,19 +109,25 @@ function createTaskItem(task,i){
             turnOffEdit();
         }
     })
+    deleteButton.addEventListener("click",(e)=>{
+        deleteTask(i);
+    })
     // checkBox.addEventListener("change",(e)=>{
     //     alert("It changed")
     // })
     bottomContainer.appendChild(dropDown);
     editDivCont.appendChild(editButton);
+    deleteButton.appendChild(deleteButtonImg);
     itemContainer.appendChild(taskLabel)
     itemContainer.appendChild(checkBox);
     itemContainer.appendChild(checkMark);
     labelContainer.appendChild(itemContainer);
-    labelContainer.appendChild(editDivCont);
+    buttonsCont.appendChild(editDivCont);
+    buttonsCont.appendChild(deleteButton);
+    labelContainer.appendChild(buttonsCont);
     taskContainer.appendChild(labelContainer);
-    taskContainer.appendChild(bottomContainer)
-    main_bottom.appendChild(taskContainer)
+    taskContainer.appendChild(bottomContainer);
+    main_bottom.appendChild(taskContainer);
     function turnOffEdit(){
         const project=loadSaved(localStorage.getItem(content.id))
         taskLabel.contentEditable=false;
@@ -132,7 +141,9 @@ function createTaskItem(task,i){
 function loadTasks(){
     content.classList.remove("main-menu");
     content.classList.add("project-menu");
+    const main_bottom=document.querySelector(".main_bottom")
     const project=loadSaved(localStorage.getItem(content.id))
+    main_bottom.innerHTML=""
     for(let i=0;i<project.tasks.length;i++){
         
         try {
@@ -179,5 +190,31 @@ function addEventsToCheckmarks(){
                 inputCheckbox.dispatchEvent(new Event('change'));
             });
         });
+    
+}
+function deleteTask(index){
+    const project=loadSaved(localStorage.getItem(content.id))
+
+    project.tasks.splice(index,1);
+    project.save();
+    loadTasks();
+    addAddButton();
+}
+function addAddButton(){
+    const plusImg=document.createElement('img');
+    const plusDiv=document.createElement('div');
+    const main_bottom=document.querySelector('.main_bottom');
+    const mainScreen=document.querySelector('.mainScreen'); 
+    plusDiv.appendChild(plusImg)
+    plusDiv.classList.add('plus-img');
+    plusImg.src=plusIcon;
+    plusDiv.addEventListener("click",(e)=>{
+        alert("Gay")
+    })
+    main_bottom.appendChild(plusDiv);
+    mainScreen.appendChild(main_bottom);
+    content.appendChild(mainScreen)
+}
+function addTask(){
     
 }

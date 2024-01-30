@@ -4,7 +4,7 @@ TODO
 
 Finish project view functionality.
 
-Missing delete tasks, open notes, add new task - inish tommorow
+Missing open notes, add new task - finish tommorow
 
 Create calender functionality, where every day you can set different tasks. 
 
