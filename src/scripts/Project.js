@@ -4,8 +4,7 @@ export function createProject(title,tasks=[]){
         title,
         tasks,
         addTask(task){
-            const taskObj=createTask(task)
-            this.tasks.push(taskObj);
+            this.tasks.push(task);
             this.save()
         },
         listTasks(){
@@ -14,8 +13,16 @@ export function createProject(title,tasks=[]){
         save(){
             localStorage.setItem(this.title,JSON.stringify(this))
         },
-        updateTask(newTask,index){
+        updateTitle(newTask,index){
             this.tasks[index].title=newTask
+            this.save();
+        },
+        updateChecked(state,index){
+            this.tasks[index].checked=state;
+            this.save();
+        },
+        updateNotes(notes,index){
+            this.tasks[index].notes=notes;
             this.save();
         }
     }

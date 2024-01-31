@@ -182,8 +182,9 @@
   }
   .bottom-container{
     display: flex;
-    justify-content: center;
-
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
   }
   .drop-down{
     width: 25px;

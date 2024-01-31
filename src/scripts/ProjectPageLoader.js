@@ -8,6 +8,8 @@ import { reloadProjects } from './ProjectCardLoader';
 import { ClearContent } from '..';
 import { loadSaved } from './Project';
 import { createTask } from './task';
+import { waitForTitle } from './FormLoader';
+import { showForm } from './FormLoader'
 
 
 const content = document.querySelector('.content');
@@ -91,6 +93,7 @@ function createTaskItem(task,i){
     checkBox.id="Task"+i;
     taskLabel.htmlFor=checkBox.id;
     checkBox.type='checkbox';
+    checkBox.checked=task.checked;
     dropDown.classList.add('drop-down')
     taskLabel.innerHTML=task.title;
     taskContainer.id=i;
@@ -102,19 +105,51 @@ function createTaskItem(task,i){
         setEndOfContenteditable(taskLabel);
     })
     taskLabel.addEventListener("blur",(e)=>{
-        turnOffEdit();
+        updateTitle(taskLabel.textContent,i);
+        taskLabel.contentEditable=false;
     })
     taskLabel.addEventListener("keypress",(e)=>{
         if(e.key==='Enter'){
-            turnOffEdit();
+            updateTitle(taskLabel.textContent,i);
+            taskLabel.contentEditable=false;
         }
     })
     deleteButton.addEventListener("click",(e)=>{
         deleteTask(i);
     })
-    // checkBox.addEventListener("change",(e)=>{
-    //     alert("It changed")
-    // })
+    checkBox.addEventListener("change",(e)=>{
+         updateCheckbox(checkBox.checked,i);
+    })
+    dropDown.addEventListener("click",(e)=>{
+        const id="Textarea"+task.title
+        if(!document.getElementById(id))
+        {
+            const textarea=document.createElement("textarea");
+            textarea.id=id;
+            textarea.rows=8;
+            textarea.cols=100;
+            textarea.style.width="100%";
+            textarea.style.padding="10px";
+            textarea.placeholder="Enter your notes here..."
+            textarea.value=loadSaved(localStorage.getItem(content.id)).tasks[i].notes;
+            textarea.addEventListener("keypress",(e)=>{
+                if(e.key==="Enter"){
+                    const textarea=document.getElementById(id);
+                    textarea.remove();
+                    dropDown.style.transform = 'rotate(0deg)';
+                    updateNotes(textarea.value,i);
+                }
+            })
+            bottomContainer.insertBefore(textarea,dropDown);
+            textarea.focus();
+            dropDown.style.transform = 'rotate(180deg)';
+        }else{
+            const textarea=document.getElementById(id);
+            textarea.remove();
+            dropDown.style.transform = 'rotate(0deg)';
+            updateNotes(textarea.value,i);
+        }
+    })
     bottomContainer.appendChild(dropDown);
     editDivCont.appendChild(editButton);
     deleteButton.appendChild(deleteButtonImg);
@@ -128,14 +163,19 @@ function createTaskItem(task,i){
     taskContainer.appendChild(labelContainer);
     taskContainer.appendChild(bottomContainer);
     main_bottom.appendChild(taskContainer);
-    function turnOffEdit(){
-        const project=loadSaved(localStorage.getItem(content.id))
-        taskLabel.contentEditable=false;
-        const newTask=taskLabel.textContent;
-        project.updateTask(newTask,i)
-
-    }
     
+}
+function updateTitle(task,i){
+    const project=loadSaved(localStorage.getItem(content.id))
+    project.updateTitle(task,i)
+}
+function updateCheckbox(state,i){
+    const project=loadSaved(localStorage.getItem(content.id))
+    project.updateChecked(state,i);
+}
+function updateNotes(notes,i){
+    const project=loadSaved(localStorage.getItem(content.id))
+    project.updateNotes(notes,i);
 }
 
 function loadTasks(){
@@ -208,13 +248,18 @@ function addAddButton(){
     plusDiv.appendChild(plusImg)
     plusDiv.classList.add('plus-img');
     plusImg.src=plusIcon;
-    plusDiv.addEventListener("click",(e)=>{
-        alert("Gay")
+    plusDiv.addEventListener("click",async (e)=>{
+        showForm("Enter the task");
+        addTask(await waitForTitle());
     })
     main_bottom.appendChild(plusDiv);
     mainScreen.appendChild(main_bottom);
     content.appendChild(mainScreen)
 }
-function addTask(){
-    
+function addTask(title){
+    const task=createTask(title);
+    const project=loadSaved(localStorage.getItem(content.id))
+    project.addTask(task);
+    project.save();
+    loadTasks();
 }
