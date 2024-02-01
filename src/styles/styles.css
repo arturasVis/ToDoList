@@ -1,6 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
 *{
     padding: 0;
     margin: 0;
+    font-family: 'Roboto', sans-serif;
+    --compliment: #C9E1FB;
+    --dominant: #EFFBFF;
+    --accent1: #009CF9;
+    --accent2: #FCFCD4;
+    --accent3: #c9c9a4;
+    --accent4: #c0c07c;
+    
 }
 
 #main_container{
@@ -10,11 +20,13 @@
 }
 
 .top{
-    background-color: aquamarine;
+    background-color: var(--compliment);
+    font-size: 60px;
+    
 }
 .content{
     display: grid;
-    background-color: antiquewhite;
+    background-color: var(--dominant);
 
 }
 .main-menu{
@@ -29,33 +41,48 @@
 .mainScreen{
     display: grid;
     grid-template-rows: 1fr 5fr;
-    background-color: bisque;
+    background-color: var(--dominant);
 }
 .main_top{
     text-align: center;
     font-size: 50px;
     padding: 3px;
-    background-color: beige;
+    background-color: var(--accent1);
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .main_bottom{
     padding: 5px 25px;
+    background-color: var(--accent2);
 }
 .footer{
-    background-color: blue;
+    background-color: var(--accent1);
 }
 .card{
-    width: 15rem;
-    height: 20rem;
-    background-color: pink;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 25vw;
+    height: 50vw;
+    min-width: 9rem;
+    min-height: 12rem;
+    max-width: 16.5em;
+    max-height: 22rem;
+    background-color: var(--accent2);
     justify-self: center;
     border-radius: 5%;
-    box-shadow: 10px 5px 5px palevioletred;
+    box-shadow: 10px 5px 5px var(--accent3);
+}
+.card > h1{
+  margin-top: 15px;
+  font-size: 20px;
+  font-family: 'Courier New', Courier, monospace;
 }
 .card:hover{
-    background-color: blueviolet;
+    background-color: var(--accent4);
 }
 
 #button{
@@ -80,7 +107,7 @@
 .popup{
     display: block;
     position: fixed;
-    background-color: aliceblue;
+    background-color: var(--accent1);
     height: auto;
     width: 200px;
     left:45%;
@@ -91,7 +118,7 @@
 .popup_form{
     display: flex;
     flex-direction: column;
-    background-color: aliceblue;
+    background-color: var(--accent1);
     text-align: center;
     padding: 5px;
 }
@@ -115,6 +142,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    font-family: Arial, Helvetica, sans-serif;
   }
   
   /* Hide the browser's default checkbox */
@@ -179,6 +207,8 @@
   .task-container{
     display: flex;
     flex-direction: column;
+    border-bottom: dashed 1px var(--accent1);
+    margin:2rem 0rem;
   }
   .bottom-container{
     display: flex;
@@ -208,4 +238,8 @@
   }
   .buttonsCont >div:first-child{
     padding-top: 4px;
+  }
+  .sideBar{
+    border-right: solid 1px black;
+    background-color: var(--accent2);
   }
