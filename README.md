@@ -1,16 +1,9 @@
 # ToDoList
 
-TODO
+Project manager.
 
+Very simple project manager. Used JS HTML and CSS with webpack. 
 
-Create calender functionality, where every day you can set different tasks. 
+![Alt text](image.png)
 
-style project cards
-
-Restyle the whole project
-
-After that it is finished
-
-Finish by thurdsday this is taking to long
-
-bug when task is just created cannot use the checkbox
+Simple functionality of creating projects and adding tasks with notes under them. Everything saved to local storage.
